@@ -49,7 +49,25 @@
 			<script src="/assets/js/panel/update-check.js"></script>
 		@endif
 	@endauth
+	
+	@php
+		$headerAd = \App\Models\Ad::where('position', 'header')->first();
+		$footerAd = \App\Models\Ad::where('position', 'footer')->first();
+	@endphp
 
+	@if($headerAd)
+		{{-- @foreach ($headerAd as $ad)
+    		{!! $ad->code !!}
+		@endforeach --}}
+		{{!!$headerAd ->code !!}}
+
+	@endif
+
+	<!-- Page Content -->
+
+	@if($footerAd)
+		{!! $footerAd->code !!}
+	@endif
 
 </body>
 </html>

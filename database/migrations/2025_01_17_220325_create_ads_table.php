@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('position'); // E.g., header, sidebar, footer
+            $table->text('code'); // HTML or JavaScript code for the ad
             $table->timestamps();
         });
     }

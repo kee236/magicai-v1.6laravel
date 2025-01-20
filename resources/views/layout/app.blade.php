@@ -60,6 +60,8 @@
         {!!$setting->frontend_code_before_body!!}
     @endif
 
+	
+
 	<script src="/assets/libs/vanillajs-scrollspy.min.js"></script>
 	<script src="/assets/libs/flickity.pkgd.min.js"></script>
 	<script src="/assets/js/frontend.js"></script>

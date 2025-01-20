@@ -22,7 +22,7 @@
     <!-- Page body -->
     <div class="page-body pt-6">
         <div class="container-xl">
-			@if(Auth::user()->type != 'admin')
+			@if(Auth::user()->type == 'admin')
 			<div class="mb-3">
 				<a href="{{route('dashboard.support.new')}}" class="btn btn-success m-2">{{__('Create New Support Request')}}</a>
 			</div>

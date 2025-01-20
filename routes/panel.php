@@ -9,6 +9,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Gateways\StripeController;
 use App\Http\Controllers\Gateways\PaypalController;
 use App\Http\Controllers\Dashboard\SupportController;
+use App\Http\Controllers\Dashboard\AdController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Dashboard\SearchController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -328,6 +329,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'l
                 })->name('index');
             });
 
+        });
+        //Adsense Area
+        Route::prefix('support')->name('support.')->group(function () {
+            Route::get('/my-adsenses', [AdController::class, 'index'])->name('list');
+            Route::get('/new-support-adsense', [AdController::class, 'newAdsense'])->name('new');
+            Route::post('/new-support-adsense/send', [AdController::class, 'newAdsenseSend']);
+
+            Route::get('/adsenses/{ads_id}', [AdController::class, 'viewAdsense'])->name('view');
+            Route::post('/adsenses-action/send-message', [AdController::class, 'viewAdsenseSendMessage']);
         });
 
         //Support Area

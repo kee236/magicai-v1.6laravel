@@ -6,7 +6,7 @@ use App\Http\Controllers\InstallationController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
-
+use App\Http\Controllers\AdController;
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function() {
     Route::get('/', [IndexController::class, 'index'])->name('index');
 });
@@ -26,8 +26,21 @@ Route::get('/update-manual', [InstallationController::class, 'updateManual']);
 Route::get('/page/{slug}', [PageController::class, 'pageContent']);
 Route::get('/privacy-policy', [PageController::class, 'pagePrivacy']);
 Route::get('/terms', [PageController::class, 'pageTerms']);
+// Route::get('/dashboard/support/adsense', [AdController::class, 'index'])->name('dashboard.support.adsense');
+// Route::get('/dashboard/support/store', [AdController::class, 'store'])->name('dashboard.support.store');
+Route::middleware(['auth', 'admin'])->prefix('dashboard')->group(function () {
 
-
+    Route::resource('ads', AdController::class, [
+        'names' => [
+            'index' => 'dashboard.ads.index',
+            'create' => 'dashboard.ads.create',
+            'store' => 'dashboard.ads.store',
+            'edit' => 'dashboard.ads.edit',
+            'update' => 'dashboard.ads.update',
+            'destroy' => 'dashboard.ads.destroy',
+        ],
+    ]);
+});
 
 
 require __DIR__.'/auth.php';
